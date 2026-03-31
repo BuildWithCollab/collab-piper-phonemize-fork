@@ -13,6 +13,11 @@ target("piper_phonemize")
     set_kind("static")
     set_languages("cxx17")
 
+    -- MSVC needs /utf-8 for IPA character constants
+    if is_plat("windows") then
+        add_cxxflags("/utf-8", { force = true })
+    end
+
     add_files(
         "src/phonemize.cpp",
         "src/phoneme_ids.cpp",
